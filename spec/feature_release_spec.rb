@@ -36,6 +36,7 @@ describe FeatureRelease do
   context 'activate & deactivating features' do
 
     it "activates a feature for a defined group" do
+      @fr = FeatureRelease.new
       @fr.define_group(:testers) do |user|
         user.new?
       end

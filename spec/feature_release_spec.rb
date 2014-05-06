@@ -18,4 +18,19 @@ describe FeatureRelease do
 
   end
 
+  context 'groups' do
+
+    before(:each) do
+      @fr = FeatureRelease.new
+    end
+
+    it "defines a group with a block" do
+      @fr.define_group(:testers) do |user|
+        user.new?
+      end
+      @fr.groups.should include(:testers)
+    end
+
+  end
+
 end

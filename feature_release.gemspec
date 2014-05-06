@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = FeatureRelease::VERSION
   spec.authors       = ["Kavinder Dhaliwal"]
   spec.email         = ["kavinderd@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Rollout features to some users (Rollout gem clone)}
+  spec.description   = %q{Allows you to restrict access of portions of an app to certain users}
   spec.homepage      = ""
   spec.license       = "MIT"
 

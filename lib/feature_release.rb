@@ -1,5 +1,8 @@
 require "feature_release/version"
 
 class FeatureRelease
-  # Your code goes here...
+  
+  def initialize
+  	@groups = {:all => {|obj| true}}
+  end
 end

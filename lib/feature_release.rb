@@ -25,8 +25,6 @@ class FeatureRelease
   def deactivate_feature(feature, group)
   	groups = @features[feature.to_sym]
   	groups.delete(group.to_sym)
-  	puts "DDDDD"
-  	puts groups
   	@features[feature.to_sym] = groups
   end
 

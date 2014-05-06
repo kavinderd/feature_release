@@ -44,6 +44,16 @@ describe FeatureRelease do
       @fr.active?(:test_feature, stub(:new? => true)).should be_true
     end
 
+    it "deactivates a feature for a defined group" do
+      @fr = FeatureRelease.new
+      @fr.define_group(:testers) do |user|
+        user.new?
+      end
+      @fr.activate_feature(:test_feature, :testers)
+      @fr.deactivate_feature(:test_feature, :testers)
+      @fr.active?(:test_feature, stub(:new? => true)).should be_false
+    end
+
   end
 
 end

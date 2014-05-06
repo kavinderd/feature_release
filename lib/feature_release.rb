@@ -9,4 +9,8 @@ class FeatureRelease
   	@features = []
   end
 
+  def define_group(name, &block)
+  	@groups[name] = block
+  end
+
 end

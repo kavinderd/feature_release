@@ -22,7 +22,16 @@ class FeatureRelease
   	end
   end
 
+  def deactivate_feature(feature, group)
+  	groups = @features[feature.to_sym]
+  	groups.delete(group.to_sym)
+  	puts "DDDDD"
+  	puts groups
+  	@features[feature.to_sym] = groups
+  end
+
   def active?(feature, user)
+  	return false unless @features[feature.to_sym].any?
   	@features[feature.to_sym].all? {|group| groups[group].call(user)}
   end
 

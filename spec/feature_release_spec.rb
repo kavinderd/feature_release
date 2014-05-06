@@ -34,6 +34,8 @@ describe FeatureRelease do
   end
 
   context 'activate & deactivating features' do
+    let(:tester) {double("user", :new? => true)}
+    let(:non_tester) {double("user", :new? => false)}
 
     before(:each) do
       @fr = FeatureRelease.new
@@ -44,12 +46,13 @@ describe FeatureRelease do
     end
 
     it "activates a feature for a defined group" do
-      @fr.active?(:test_feature, stub(:new? => true)).should be_true
+      @fr.active?(:test_feature, tester).should be_true
+      @fr.active?(:test_feature, non_tester).should be_false
     end
 
     it "deactivates a feature for a defined group" do
       @fr.deactivate_feature(:test_feature, :testers)
-      @fr.active?(:test_feature, stub(:new? => true)).should be_false
+      @fr.active?(:test_feature, tester).should be_false
     end
 
   end

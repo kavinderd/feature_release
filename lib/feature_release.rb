@@ -1,4 +1,5 @@
 require "feature_release/version"
+require "feature_release/feature"
 
 class FeatureRelease
 

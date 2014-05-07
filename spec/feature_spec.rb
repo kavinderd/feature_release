@@ -16,5 +16,12 @@ describe FeatureRelease::Feature do
   	f = FeatureRelease::Feature.new(:test_feature)
   	f.add_group(:testers)
   end
+
+  it "allows groups to be removed from @groups" do
+  	f = FeatureRelease::Feature.new(:test_feature)
+  	f.add_group(:testers)
+  	f.remove_group(:testers)
+  	f.groups.should_not include(:testers)
+  end
 	
 end

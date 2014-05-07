@@ -7,7 +7,9 @@ class FeatureRelease
   
   def initialize
   	@groups = {:all => lambda{|obj| true}}
-  	@features = {}
+  	@features = Hash.new do |hash, missing_key|
+  	              hash[missing_key] = Feature.new(missing_key)
+  	            end
   end
 
   def define_group(name, &block)
@@ -15,23 +17,16 @@ class FeatureRelease
   end
 
   def activate_feature(feature, group)
-  	fsym = feature.to_sym
-  	if @features[fsym]
-  	  @features << group
-  	else
-  	  @features[fsym] = [group]
-  	end
+  	@features[feature.to_sym].add_group(group)
   end
 
   def deactivate_feature(feature, group)
-  	groups = @features[feature.to_sym]
-  	groups.delete(group.to_sym)
-  	@features[feature.to_sym] = groups
+  	@features[feature.to_sym].remove_group(group)
   end
 
   def active?(feature, user)
-  	return false unless @features[feature.to_sym].any?
-  	@features[feature.to_sym].all? {|group| groups[group].call(user)}
+  	return false if @features[feature.to_sym].groups.empty?
+  	@features[feature.to_sym].groups.all? {|group| groups[group].call(user)}
   end
 
 end

@@ -11,5 +11,10 @@ describe FeatureRelease::Feature do
   	f = FeatureRelease::Feature.new(:test_feature)
   	f.groups.should eq([])
   end
+
+  it "allows groups to be added to @groups" do
+  	f = FeatureRelease::Feature.new(:test_feature)
+  	f.add_group(:testers)
+  end
 	
 end

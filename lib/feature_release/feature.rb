@@ -13,6 +13,10 @@ class FeatureRelease
       @groups << group.to_sym
     end
 
+    def remove_group(group)
+      @groups.delete(group.to_sym)
+    end
+
   end
 
 end

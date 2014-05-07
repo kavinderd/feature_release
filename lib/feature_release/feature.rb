@@ -9,6 +9,10 @@ class FeatureRelease
       @groups = []
     end  	
 
+    def add_group(group)
+      @groups << group.to_sym
+    end
+
   end
 
 end

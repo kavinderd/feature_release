@@ -6,5 +6,16 @@ class FeatureRelease
  	  @store = options.fetch(:store)
  	end
 
+ 	def save(feature)
+ 	  persist(feature)
+ 	end
+
+
+ 	private
+
+ 	  def persist(feature)
+ 	  	@store.set("feature:#{feature.name}", feature.serialized)
+ 	  end
+
   end
 end

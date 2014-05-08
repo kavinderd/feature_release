@@ -15,8 +15,7 @@ describe FeatureRelease::Storage do
 
   	it "should save a feature to the store" do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
-  	  @storage.save(double 'Feature', name: "test_feature", serialized: "test_users, new_users, admin_users")
-  	  @redis.get("features:test_feature").should eq("test_users, new_users, admin_users")
+  	  @storage.save(double 'Feature', name: "test_feature", serialized: "test_users, new_users, admin_users").should eq "OK"
   	end
 
 

@@ -7,7 +7,7 @@ describe FeatureRelease::Storage do
   end
 
   it "should initialize with a store" do
-  	expect{FeatureRelease::Storage.new(store: nil)}.to raise_error
+  	expect{FeatureRelease::Storage.new()}.to raise_error
   	expect{FeatureRelease::Storage.new(store: @redis)}.to_not raise_error
   end
 

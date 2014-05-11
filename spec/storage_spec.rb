@@ -15,18 +15,18 @@ describe FeatureRelease::Storage do
 
   	before(:each) do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
-  	  @feature = double 'Feature', name: "test_feature", serialized: "test_users, new_users, admin_users"
+  	  @feature = double 'Feature', name: :test_feature, to_s: "test_users, new_users, admin_users"
   	end
 
   	it "should save a feature to the store" do
   	  @storage.save(@feature)
-  	  @storage.get(@feature).should eq(@feature.serialized)
+  	  @storage.get(@feature).should eq(@feature.to_s)
   	end
 
   	it "should add a feature to the collection of features" do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
   	  @storage.save(@feature)
-  	  @storage.get_all.should eq(["test_feature"])
+  	  @storage.get_all.should eq([:test_feature])
   	end
 
   end

@@ -24,11 +24,11 @@ describe FeatureRelease::Feature do
   	f.groups.should_not include(:testers)
   end
 
-  it "can be serialized into a string" do
+  it "can be to_s into a string" do
     f = FeatureRelease::Feature.new(:test_feature)
     f.add_group(:testers)
     f.add_group(:admins)
-    f.serialized.should eq("testers,admins")
+    f.to_s.should eq("testers,admins")
   end
 	
 end

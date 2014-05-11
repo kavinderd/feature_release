@@ -15,7 +15,7 @@ class FeatureRelease
  	end
 
  	def get_all
- 	  (retrieve(global_key) || "").split(",")
+ 	  (retrieve(global_key) || "").split(",").map(&:to_sym)
  	end
 
 

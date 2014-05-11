@@ -30,5 +30,14 @@ describe FeatureRelease::Feature do
     f.add_group(:admins)
     f.to_s.should eq("testers,admins")
   end
+
+  it "can be built from a string" do
+    f = FeatureRelease::Feature.new(:test_feature)
+    f.add_grouo(:testers)
+    f.add_group(:admins)
+    string = f.to_s
+    from_s = FeatureRelease::Feature.new(:test_feature, string)
+    from_s.groups.should eq([:testers, :admins])
+  end
 	
 end

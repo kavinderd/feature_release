@@ -26,7 +26,7 @@ describe FeatureRelease::Storage do
   	it "should add a feature to the collection of features" do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
   	  @storage.save(@feature)
-  	  @storage.get_all(:features).should eq(["test_feature"])
+  	  @storage.get_all.should eq(["test_feature"])
   	end
 
   end

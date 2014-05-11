@@ -11,18 +11,31 @@ class FeatureRelease
  	end
 
  	def get(feature)
- 	  retrieve(feature)
+ 	  retrieve(feature_key(feature))
+ 	end
+
+ 	def get_all
+ 	  (retrieve(global_key) || "").split(",")
  	end
 
 
  	private
 
- 	  def persist(feature)
- 	  	@store.set("feature:#{feature.name}", feature.serialized)
+ 	  def feature_key(feature)
+ 	  	"feature:#{feature.name}"
  	  end
 
- 	  def retrieve(feature)
- 	  	@store.get("feature:#{feature.name}")
+ 	  def global_key
+ 	  	"features:all"
+ 	  end
+
+ 	  def persist(feature)
+ 	  	@store.set("feature:#{feature.name}", feature.serialized)
+ 	  	@store.set("features:all", (get_all | [feature.name]).join(","))
+ 	  end
+
+ 	  def retrieve(key)
+ 	  	@store.get(key)
  	  end
 
   end

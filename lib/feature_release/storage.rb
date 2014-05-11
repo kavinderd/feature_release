@@ -30,7 +30,7 @@ class FeatureRelease
  	  end
 
  	  def persist(feature)
- 	  	@store.set(feature_key(feature), feature.to_s)
+ 	  	@store.set(feature_key(feature), feature.to_string)
  	  	@store.set(global_key, (get_all | [feature.name]).join(","))
  	  end
 

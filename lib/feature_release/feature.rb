@@ -3,6 +3,7 @@ class FeatureRelease
   class Feature
 
   	attr_accessor :groups
+    attr_reader :name
 
     def initialize(name, groups_string=nil)
       @name = name
@@ -18,7 +19,7 @@ class FeatureRelease
       @groups.delete(group.to_sym)
     end
 
-    def to_s
+    def to_string
       @groups.join(",")
     end
 

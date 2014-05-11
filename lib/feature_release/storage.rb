@@ -10,11 +10,19 @@ class FeatureRelease
  	  persist(feature)
  	end
 
+ 	def get(feature)
+ 	  retrieve(feature)
+ 	end
+
 
  	private
 
  	  def persist(feature)
  	  	@store.set("feature:#{feature.name}", feature.serialized)
+ 	  end
+
+ 	  def retrieve(feature)
+ 	  	@store.get("feature:#{feature.name}")
  	  end
 
   end

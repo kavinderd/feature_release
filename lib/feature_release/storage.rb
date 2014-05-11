@@ -30,8 +30,8 @@ class FeatureRelease
  	  end
 
  	  def persist(feature)
- 	  	@store.set("feature:#{feature.name}", feature.serialized)
- 	  	@store.set("features:all", (get_all | [feature.name]).join(","))
+ 	  	@store.set(key(feature), feature.serialized)
+ 	  	@store.set(global_key, (get_all | [feature.name]).join(","))
  	  end
 
  	  def retrieve(key)

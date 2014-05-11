@@ -56,5 +56,29 @@ describe FeatureRelease do
     end
 
   end
-  
+
+  context "persistence" do
+    let(:tester) {double("user", :new? => true, :admin? => false)}
+    let(:admin) {double("user", :admin? => true, :new? => false)}
+
+    before(:each) do
+      @redis = MockRedis.new
+      @fr = FeatureRelease.new(@redis)
+      @fr.define_group(:testers) do |user|
+        user.new?
+      end
+      @fr.activate_feature(:test_feature, :testers)
+      @fr.define_group(:admins) do |user|
+        user.admin?
+      end
+      @fr.activate_feature(:new_feature, :admins)
+    end
+
+    it "commands its storage object to save the features" do
+      @fr.save
+      @redis.get_all.should eq[:test_feature, :new_feature]
+    end
+
+
+  end
 end

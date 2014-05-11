@@ -13,12 +13,17 @@ describe FeatureRelease::Storage do
 
   context 'saving features' do
 
-  	it "should save a feature to the store" do
+  	before(:each) do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
-  	  @storage.save(double 'Feature', name: "test_feature", serialized: "test_users, new_users, admin_users").should eq "OK"
+  	  @feature = double 'Feature', name: "test_feature", serialized: "test_users, new_users, admin_users"
   	end
 
+  	it "should save a feature to the store" do
+  	  @storage.save(@feature)
+  	  @storage.get(@feature).should eq(@feature.serialized)
+  	end
 
+  	
   end
 
 end

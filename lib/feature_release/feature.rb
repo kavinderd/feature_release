@@ -4,9 +4,10 @@ class FeatureRelease
 
   	attr_accessor :groups
 
-    def initialize(name)
+    def initialize(name, groups_string=nil)
       @name = name
       @groups = []
+      parse_groups(groups_string)
     end  	
 
     def add_group(group)
@@ -20,6 +21,12 @@ class FeatureRelease
     def to_s
       @groups.join(",")
     end
+
+    private
+      def parse_groups(string)
+        return unless string
+        @groups = string.split(",").map(&:to_sym)
+      end
 
   end
 

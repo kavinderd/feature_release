@@ -17,6 +17,10 @@ class FeatureRelease
       @groups.delete(group.to_sym)
     end
 
+    def serialized
+      @groups.join(",")
+    end
+
   end
 
 end

@@ -28,7 +28,7 @@ describe FeatureRelease::Feature do
     f = FeatureRelease::Feature.new(:test_feature)
     f.add_group(:testers)
     f.add_group(:admins)
-    f.serialized.should eq("testers, admins")
+    f.serialized.should eq("testers,admins")
   end
 	
 end

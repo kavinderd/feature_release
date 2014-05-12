@@ -11,7 +11,7 @@ class FeatureRelease
   	@features = Hash.new do |hash, missing_key|
   	              hash[missing_key] = Feature.new(missing_key)
   	            end
-    @storage = storage
+    set_storage(storage) if storage
   end
 
   def define_group(name, &block)
@@ -32,11 +32,20 @@ class FeatureRelease
   end
 
   def persisted?(feature)
-    !(@storage.get(@features[feature.to_sym]).nil?)
+    !(@storage.get(@features[feature.to_sym].name).nil?)
   end
 
   def save
-    @features.each{|key, value| puts value.name; @storage.save(value)}
+    @features.each{|key, value|  @storage.save(value.name, value.to_string)}
   end
+
+  private
+
+    def set_storage(storage)
+      @storage = storage
+      @storage.get_all.each do |feature_name|
+        @features[feature_name.to_sym] = Feature.new(feature_name, @storage.get(feature_name))
+      end
+    end
 
 end

@@ -6,8 +6,8 @@ class FeatureRelease
  	  @store = options.fetch(:store)
  	end
 
- 	def save(feature)
- 	  persist(feature)
+ 	def save(feature, data)
+ 	  persist(feature, data)
  	end
 
  	def get(feature)
@@ -22,16 +22,16 @@ class FeatureRelease
  	private
 
  	  def feature_key(feature)
- 	  	"feature:#{feature.name}"
+ 	  	"feature:#{feature}"
  	  end
 
  	  def global_key
  	  	"features:all"
  	  end
 
- 	  def persist(feature)
- 	  	@store.set(feature_key(feature), feature.to_string)
- 	  	@store.set(global_key, (get_all | [feature.name]).join(","))
+ 	  def persist(feature, data)
+ 	  	@store.set(feature_key(feature), data)
+ 	  	@store.set(global_key, (get_all | [feature]).join(","))
  	  end
 
  	  def retrieve(key)

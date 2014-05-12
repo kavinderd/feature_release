@@ -19,13 +19,13 @@ describe FeatureRelease::Storage do
   	end
 
   	it "should save a feature to the store" do
-  	  @storage.save(@feature)
-  	  @storage.get(@feature).should eq(@feature.to_string)
+  	  @storage.save(@feature.name, @feature.to_string)
+  	  @storage.get(@feature.name).should eq(@feature.to_string)
   	end
 
   	it "should add a feature to the collection of features" do
   	  @storage = FeatureRelease::Storage.new(store: @redis)
-  	  @storage.save(@feature)
+  	  @storage.save(@feature.name, @feature.to_string)
   	  @storage.get_all.should eq([:test_feature])
   	end
 

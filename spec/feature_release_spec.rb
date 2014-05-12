@@ -63,7 +63,8 @@ describe FeatureRelease do
 
     before(:each) do
       @redis = MockRedis.new
-      @fr = FeatureRelease.new(FeatureRelease::Storage.new(store:@redis))
+      @storage = FeatureRelease::Storage.new(store:@redis)
+      @fr = FeatureRelease.new(@storage)
       @fr.define_group(:testers) do |user|
         user.new?
       end
@@ -77,6 +78,15 @@ describe FeatureRelease do
     it "commands its storage object to save the features" do
       @fr.save
       @fr.persisted?(:test_feature).should be_true
+    end
+
+    it "can build itself from persisted date" do
+      @fr.save
+      @new_fr = FeatureRelease.new(@storage)
+      @new_fr.define_group(:admins) do |user|
+        user.admin?
+      end
+      @new_fr.active?(:new_feature, admin).should be_true
     end
 
 
